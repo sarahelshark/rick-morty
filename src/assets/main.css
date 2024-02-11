@@ -1,35 +1,112 @@
-@import './base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+:root {
+  --rick-morty-light: lightgray;
+  --rick-morty-lighter: white;
+  --rick-morty-dark: #333;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+body {
+  font-family:'Poppins', sans-serif;
+  background-color: var(--rick-morty-light);
+}
+
+img {
+  max-width: 100%;
+}
+
+
+.container
+{
+  width: 80%;
+  max-width: 1176px;
+  margin: auto;
+}
+
+.row
+{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -1rem;
+}
+
+[class^="col-"]{
+  padding: 1rem;
+}
+
+.col-12
+{
+  width: 100%;
+}
+
+/* SM */
+@media screen and (min-width: 568px)
+{
+  .col-sm-6
+  {
+    width: 50%;
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+/* MD */
+@media screen and (min-width: 768px)
+{
+
+  .col-md-4
+  {
+    width: calc(100% / 12 * 4);
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+}
+
+@media screen and (min-width: 1024px)
+{
+
+  .col-lg-4
+  {
+    width: calc(100% / 12 * 4);
+  }
+
+  .col-lg-3
+  {
+    width: calc(100% / 12 * 3);
+  }
+
+}
+
+
+/* LG */
+@media screen and (min-width: 1200px)
+{
+
+  .col-xl-4
+  {
+    width: calc(100% / 12 * 4);
+  }
+
+  .col-xl-3
+  {
+    width: calc(100% / 12 * 3);
+  }
+
+}
+
+/* XL */
+@media screen and (min-width: 1440px)
+{
+
+  .col-xxl-4
+  {
+    width: calc(100% / 12 * 4);
+  }
+
+  .col-xxl-3
+  {
+    width: calc(100% / 12 * 3);
   }
 }
