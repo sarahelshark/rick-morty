@@ -1,7 +1,15 @@
 <script>
 import axios from "axios";
+import AppHeader from "./components/AppHeader.vue";
+import AppMain from "./components/AppMain.vue";
+import AppFooter from "./components/AppFooter.vue";
 export default {
   name: "App",
+  components:{
+    AppHeader,
+    AppMain,
+    AppFooter,
+  },
   data() {
     return {
       base_api_url: "https://rickandmortyapi.com/api/character",
@@ -27,12 +35,23 @@ export default {
 };
 </script>
 <template>
-  <div v-for="character in characters.results" :key="character.id + '_character'">
-   {{ character.name }}
-   <img :src="character.image" alt=""/>
-   {{ character.species}}
-   {{ character.status }}
-  </div>
+
+  <AppHeader></AppHeader>
+<AppMain></AppMain>
+<AppFooter></AppFooter>
+  <main>
+    <div
+      v-for="character in characters.results"
+      :key="character.id + '_character'"
+    >
+      {{ character.name }}
+      <img :src="character.image" alt="" />
+      {{ character.species }}
+      {{ character.status }}
+    </div>
+  </main>
+
+  <footer></footer>
 </template>
 
 <style scoped></style>
