@@ -1,17 +1,29 @@
 <script>
-    export default {
-        name:'AppFooter',
-    }
+export default {
+  name: 'AppFooter'
+}
 </script>
 
 <template>
-    <div>
-footer
-    </div>
+  <footer>
+    
+    <p>
+      &copy; 2024 Boolean rick morty live
+    </p>
+
+  </footer>
 </template>
 
 
 
-<style >
+<style scoped>
+
+    footer {
+      background-color: var(--rick-morty-dark);
+      color: var(--rick-morty-lighter);
+      padding: 2rem;
+      text-align: center;
+      
+    }
 
 </style>

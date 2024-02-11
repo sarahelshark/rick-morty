@@ -6,7 +6,7 @@ export default {
   name: 'AppMain',
   components: {
     CharacterItem,
-    LoadingIcon,
+    LoadingIcon
   },
   data() {
     return {
@@ -16,28 +16,53 @@ export default {
       error: false
     }
   },
-  mounted() {
-    console.log(this.base_api_url);
-    axios
-      .get('https://rickandmortyapi.com/api/character')
-      .then((response) => {
-        console.log(response);
-        console.log(response.data); // All data including pagination info
-        console.log(response.data.results); // Only characters results
-        //console.log(this); 
-        this.characters = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-        this.error = error.message;
-      })
+  methods: {
+    getCharacters(url) {
+      axios
+        .get(url)
+        .then((response) => {
+          console.log(response);
+          console.log(response.data); // All data including pagination info
+          console.log(response.data.results); // Only characters results
+          //console.log(this); 
+          this.characters = response.data;
+          this.loading = false;
+
+        })
+        .catch((error) => {
+          console.error(error);
+          this.error = error.message;
+        })
+    }
   },
-  
+  computed: {
+    getResults() {
+      //console.log(this.characters);
+      return this.characters.results ? 'Total results:' + this.characters.results.length : 'no results yet'// 20
+    }
+  },
+  created() {
+    this.getCharacters(this.base_api_url)
+
+    // Use a timeout to test your loading icon
+    // the timeout is used for slow down the request and 
+    // simulate a slow network request
+    // disable the time out once the loader is ready
+/*     setTimeout(() => {
+      this.getCharacters(this.base_api_url)
+
+    }, 3000) */
+  }
 }
-</script> 
+</script>
+
 <template>
   <main>
+
+
     <div class="container">
+
+
       <div class="filters">
         <!-- add name filter input -->
         <input type="text" placeholder="Type a name to search">
@@ -47,15 +72,30 @@ export default {
           <option value="alive">Alive</option>
           <option value="death">Death</option>
           <option value="unkown">Unknown</option>
+
         </select>
       </div>
-      <div class="row">
+
+
+      <div class="row" v-if="!loading">
+
         <CharacterItem v-for="character in characters.results" :key="character.id + '_character'" :character="character">
         </CharacterItem>
+
       </div>
       <!-- /.row -->
+      <LoadingIcon v-else></LoadingIcon>
+
+      <div>
+        {{ getResults }}
+      </div>
+
     </div>
     <!-- /.container -->
+
   </main>
 </template>
+
+
+
 <style scoped></style>

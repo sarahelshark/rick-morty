@@ -26,16 +26,19 @@ export default {
 {
   background-color: white;
   transition: all 1s;
+
   &:hover
   {
     filter: drop-shadow(0 0 15px #507183);
     scale: 1.01;
   }
+
   > img
   {
     width: 100%;
     display: block;
   }
+
   > div
   {
     padding: 1rem;
