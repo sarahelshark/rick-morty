@@ -1,15 +1,18 @@
 <script>
 import axios from 'axios';
 import CharacterItem from './CharacterItem.vue';
+import LoadingIcon from './LoadingIcon.vue';
 export default {
   name: 'AppMain',
   components: {
-    CharacterItem
+    CharacterItem,
+    LoadingIcon,
   },
   data() {
     return {
       base_api_url: 'https://rickandmortyapi.com/api/character',
       characters: [],
+      loading: true,
       error: false
     }
   },
@@ -28,9 +31,10 @@ export default {
         console.error(error);
         this.error = error.message;
       })
-  }
+  },
+  
 }
-</script>
+</script> 
 <template>
   <main>
     <div class="container">
