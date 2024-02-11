@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       base_api_url: "https://rickandmortyapi.com/api/character",
-      characters: null,
+      characters: [],
       error: false,
     };
   },
