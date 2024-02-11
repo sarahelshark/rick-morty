@@ -27,8 +27,12 @@ export default {
 };
 </script>
 <template>
-  <div v-for="character in characters.results">
-  {{ character.name }}</div>
+  <div v-for="character in characters.results" :key="character.id + '_character'">
+   {{ character.name }}
+   <img :src="character.image" alt=""/>
+   {{ character.species}}
+   {{ character.status }}
+  </div>
 </template>
 
 <style scoped></style>
