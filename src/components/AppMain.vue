@@ -4,12 +4,14 @@ import {store} from '../store.js';
 import CharacterItem from "./CharacterItem.vue";
 import LoadingIcon from "./LoadingIcon.vue";
 import ResultsFilter from "./ResultsFilter.vue";
+import TotalResults from './TotalResults.vue';
 export default {
   name: "AppMain",
   components: {
     CharacterItem,
     LoadingIcon,
-    ResultsFilter
+    ResultsFilter,
+    TotalResults
 },
   data() {
     return {
@@ -35,8 +37,8 @@ export default {
   computed: {
     getResults() {
       //console.log(this.characters);
-      return this.store.characters.results
-        ? "Total results:" + this.store.characters.results.length
+      return store.characters.results
+        ? "Total results:" + store.characters.results.length
         : "no results yet"; // 20
     },
   },
@@ -74,9 +76,7 @@ export default {
       <!-- /.row -->
       <LoadingIcon v-else></LoadingIcon>
 
-      <div>
-        {{ getResults }}
-      </div>
+      <TotalResults></TotalResults>
     </div>
     <!-- /.container -->
   </main>
