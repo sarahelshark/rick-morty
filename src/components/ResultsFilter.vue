@@ -46,4 +46,22 @@ export default {
   </div>
 </template>
 
-<style></style>
+<style scoped > 
+.filters{ 
+    margin-top: 1rem;
+    
+    /*nesting nota: potrei anche far > direttamente o prendere tag senza e commerciale> leggi doc  */
+    & input,
+    & > select,
+    & > button 
+    {
+        padding: 1rem;
+        margin: .1rem;
+        border-radius: .25rem;
+        border-style: none;
+
+        
+    }
+
+}
+</style>
