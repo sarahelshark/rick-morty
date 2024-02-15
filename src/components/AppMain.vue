@@ -26,10 +26,10 @@ export default {
       //uso destructuring
       const [searchText, selectedStatus] = data ;
 
-      const url = `${this.base_api_url}?name=${searchText}&status=${selectedStatus}`;
+      const url = `${store.base_api_url}?name=${searchText}&status=${selectedStatus}`;
       console.log(url);
 
-      this.getCharacters(url);
+      store.getCharacters(url);
     },
   },
   computed: {
@@ -41,7 +41,7 @@ export default {
     },
   },
   created() {
-    this.store.getCharacters(this.store.base_api_url);
+    store.getCharacters(this.store.base_api_url);
 
     // Use a timeout to test your loading icon
     // the timeout is used for slow down the request and
