@@ -2,12 +2,14 @@
 import axios from "axios";
 import CharacterItem from "./CharacterItem.vue";
 import LoadingIcon from "./LoadingIcon.vue";
+import ResultsFilter from "./ResultsFilter.vue";
 export default {
   name: "AppMain",
   components: {
     CharacterItem,
     LoadingIcon,
-  },
+    ResultsFilter
+},
   data() {
     return {
       base_api_url: "https://rickandmortyapi.com/api/character",
@@ -38,9 +40,13 @@ export default {
           this.error = error.response.data.error;
         });
     },
-    filterResults(){
+    filterResults(data){
       //?name=rick&status=alive
-      const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
+      console.log('filtered', data);
+      //uso destructuring
+      const [searchText, selectedStatus] = data ;
+
+      const url = `${this.base_api_url}?name=${searchText}&status=${selectedStatus}`;
       console.log(url);
 
       this.getCharacters(url);
@@ -72,19 +78,9 @@ export default {
 <template>
   <main>
     <div class="container">
-      <div class="filters">
-        <!-- add name filter input -->
-        <input type="text" placeholder="Type a name to search" v-model="searchText" />
-        <!-- add a select status filter -->
-        <select name="status" id="status" v-model="selectedStatus">
-          <option value="" selected>All</option>
-          <option value="alive">Alive</option>
-          <option value="dead">Dead</option>
-          <option value="unknown">Unknown</option>
-        </select>
 
-        <button @click="filterResults"> filter now</button>
-      </div>
+      <ResultsFilter @filtered="filterResults"></ResultsFilter>
+
        <div v-if="error" style="color:red;"> {{ error }}</div>
 
       <div class="row" v-if="!loading">
