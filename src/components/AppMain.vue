@@ -11,7 +11,7 @@ export default {
     CharacterItem,
     LoadingIcon,
     ResultsFilter,
-    TotalResults
+    TotalResults,
 },
   data() {
     return {
@@ -34,14 +34,7 @@ export default {
       store.getCharacters(url);
     },
   },
-  computed: {
-    getResults() {
-      //console.log(this.characters);
-      return store.characters.results
-        ? "Total results:" + store.characters.results.length
-        : "no results yet"; // 20
-    },
-  },
+ 
   created() {
     store.getCharacters(this.store.base_api_url);
 

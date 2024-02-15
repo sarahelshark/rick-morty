@@ -3,12 +3,11 @@ import {store} from '../store.js';
 export default {
     name:'TotalResults',
     data(){
-        return 
-            store
+    return store
     },
     computed:{
         getResults() {
-          return store.characters.result ? "Total results:" + store.characters.results.length : "no results yet"; // 20
+          return store.characters.results ? "Total results:" + store.characters.results.length : "no results yet"; // 20
         }
     },
 }
@@ -16,7 +15,7 @@ export default {
 
 <template>
   <div>
-    {{ getResults }}
+    {{ getResults}}
   </div>
 </template>
 
