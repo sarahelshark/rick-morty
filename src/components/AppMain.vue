@@ -29,10 +29,13 @@ export default {
           //console.log(this);
           this.characters = response.data;
           this.loading = false;
+          //reset the error massage to false if on the
+          //previous call we got an error
+          this.error = false;
         })
         .catch((error) => {
-          console.error(error);
-          this.error = error.message;
+          console.error(error.response.data.error);
+          this.error = error.response.data.error;
         });
     },
     filterResults(){
@@ -82,6 +85,7 @@ export default {
 
         <button @click="filterResults"> filter now</button>
       </div>
+       <div v-if="error" style="color:red;"> {{ error }}</div>
 
       <div class="row" v-if="!loading">
         <CharacterItem
