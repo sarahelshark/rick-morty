@@ -15,6 +15,7 @@ export default {
       loading: true,
       error: false,
       searchText:'',
+      selectedStatus:'',
     };
   },
   methods: {
@@ -36,7 +37,7 @@ export default {
     },
     filterResults(){
       //?name=rick&status=alive
-      const url = `${this.base_api_url}?name=${this.searchText}`;
+      const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
       console.log(url);
 
       this.getCharacters(url);
@@ -72,7 +73,7 @@ export default {
         <!-- add name filter input -->
         <input type="text" placeholder="Type a name to search" v-model="searchText" />
         <!-- add a select status filter -->
-        <select name="status" id="status">
+        <select name="status" id="status" v-model="selectedStatus">
           <option value="" selected>All</option>
           <option value="alive">Alive</option>
           <option value="death">Death</option>
