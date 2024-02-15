@@ -76,8 +76,8 @@ export default {
         <select name="status" id="status" v-model="selectedStatus">
           <option value="" selected>All</option>
           <option value="alive">Alive</option>
-          <option value="death">Death</option>
-          <option value="unkown">Unknown</option>
+          <option value="dead">Dead</option>
+          <option value="unknown">Unknown</option>
         </select>
 
         <button @click="filterResults"> filter now</button>
