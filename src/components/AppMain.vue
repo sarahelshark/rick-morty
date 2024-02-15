@@ -1,5 +1,6 @@
 <script>
-import axios from "axios";
+import {store} from '../store.js';
+
 import CharacterItem from "./CharacterItem.vue";
 import LoadingIcon from "./LoadingIcon.vue";
 import ResultsFilter from "./ResultsFilter.vue";
@@ -12,34 +13,13 @@ export default {
 },
   data() {
     return {
-      base_api_url: "https://rickandmortyapi.com/api/character",
-      characters: [],
-      loading: true,
-      error: false,
+      store, //store: store; versione non semplificata
       searchText:'',
       selectedStatus:'',
     };
   },
   methods: {
-    getCharacters(url) {
-      axios
-        .get(url)
-        .then((response) => {
-          console.log(response);
-          console.log(response.data); // All data including pagination info
-          console.log(response.data.results); // Only characters results
-          //console.log(this);
-          this.characters = response.data;
-          this.loading = false;
-          //reset the error massage to false if on the
-          //previous call we got an error
-          this.error = false;
-        })
-        .catch((error) => {
-          console.error(error.response.data.error);
-          this.error = error.response.data.error;
-        });
-    },
+    
     filterResults(data){
       //?name=rick&status=alive
       console.log('filtered', data);
@@ -55,13 +35,13 @@ export default {
   computed: {
     getResults() {
       //console.log(this.characters);
-      return this.characters.results
-        ? "Total results:" + this.characters.results.length
+      return this.store.characters.results
+        ? "Total results:" + this.store.characters.results.length
         : "no results yet"; // 20
     },
   },
   created() {
-    this.getCharacters(this.base_api_url);
+    this.store.getCharacters(this.store.base_api_url);
 
     // Use a timeout to test your loading icon
     // the timeout is used for slow down the request and
@@ -81,11 +61,11 @@ export default {
 
       <ResultsFilter @filtered="filterResults"></ResultsFilter>
 
-       <div v-if="error" style="color:red;"> {{ error }}</div>
+       <div v-if="store.error" style="color:red;"> {{ store.error }}</div>
 
-      <div class="row" v-if="!loading">
+      <div class="row" v-if="!store.loading">
         <CharacterItem
-          v-for="character in characters.results"
+          v-for="character in store.characters.results"
           :key="character.id + '_character'"
           :character="character"
         >
